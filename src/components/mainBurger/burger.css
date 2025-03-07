@@ -1,0 +1,76 @@
+.burger_block {
+  position: relative;
+}
+
+.burger-active {
+  position: absolute;
+  z-index: 100000;
+  padding: 40px 20px 70px;
+  background-color: #fff;
+  right: 0;
+  font-family: "Manrope", sans-serif;
+  transition: 0.5s;
+}
+
+.burger-logo {
+  display: flex;
+  align-items: center;
+}
+.burger-logo button {
+  margin-left: 30px;
+  border-radius: 50%;
+  border: none;
+  font-size: 18px;
+  padding: 8px 13px;
+  background-color: #f5f6f6;
+  cursor: pointer;
+}
+.burger-logo button:hover {
+  transition: 0.2s;
+  color: #ff5400;
+}
+
+.burger_main {
+  margin-top: 30px;
+}
+.burger_main li:not(:first-child) {
+  padding-top: 30px;
+}
+
+.borger-bottom {
+  margin-top: 400px;
+}
+.borger-bottom h3 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.borger-bottom button {
+  padding: 18px 40px;
+  border-radius: 16px;
+  font-size: 18px;
+  border: none;
+  background-color: #ff5400;
+  cursor: pointer;
+}
+.borger-bottom button:hover {
+  background-color: #ffccb2;
+  transition: 0.3s;
+}
+.borger-bottom button:hover a {
+  color: #ff5400;
+  transition: 0.3s;
+}
+.borger-bottom button a {
+  color: #fff;
+}
+
+.burger_main a {
+  color: black;
+  font-size: 17px;
+  font-weight: 500;
+}
+.burger_main a:hover {
+  transition: 0.3s;
+  color: #ff5400;
+} /*# sourceMappingURL=burger.css.map */
