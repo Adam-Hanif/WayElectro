@@ -39,7 +39,11 @@ function Advantage({ Advantages }) {
             </span>
           </div>
           <div className="quality_img">
-            <Link download={"SSS.txt"} target="_blank" rel="noreferrer">
+            <Link
+              download={"Розетки и выключатели.docx"}
+              target="_blank"
+              rel="noreferrer"
+            >
               <span />
             </Link>
 

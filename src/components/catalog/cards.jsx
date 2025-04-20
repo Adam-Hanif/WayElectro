@@ -26,18 +26,18 @@ function Card({ id, name, text, price, imageUrl }) {
         </div>
         <div className="card-info">
           <p className="card-info_title">{name}</p>
-          <p className="card-info_name">{text}</p>
-          <p className="card-info_price">{price}₽</p>
+          {/* <p className="card-info_name">{text}</p> 
+            {/* <p className="card-info_price">{price}₽</p>
         </div>
         <div className="card-item_btn">
-          <button
+          {/* <button
             onClick={() => {
               window.location.href = `/catalogById/${id}`;
             }}
             className="card-btn-1"
           >
             Подробности
-          </button>
+          </button> */}
           <button
             className="card-btn-2"
             onClick={() =>

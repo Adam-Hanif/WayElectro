@@ -25,7 +25,6 @@ function Main({
   };
 
   const location = useLocation();
-  console.log(location);
 
   // const [scroll, setScroll] = React.useState("");
 

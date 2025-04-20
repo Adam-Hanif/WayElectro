@@ -12,6 +12,7 @@
     font-size: 17px;
     font-weight: 600;
     align-items: center;
+
     .sorting_input {
       position: relative;
       img {
@@ -46,12 +47,22 @@
 
   .card-item {
     margin-bottom: 40px;
-    width: 200px;
+
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 0px 0px 10px rgb(0, 0, 0);
+    }
+    transition: 0.3s;
 
     .card-img {
       .img-block {
         max-width: 100%;
         margin-top: 20px;
+
         img {
           max-width: 100%;
           max-height: 100px;
@@ -79,7 +90,7 @@
     }
     .card-info {
       margin-top: 20px;
-      min-height: 150px;
+      margin-bottom: 20px;
 
       .card-info_title,
       .card-info_price {
