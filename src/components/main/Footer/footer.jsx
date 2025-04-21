@@ -2,14 +2,22 @@ import React from "react";
 import "./footer.scss";
 import logo from "../../../assets/images/logo-footer.png";
 import img_footer from "../../../assets/images/img-footer.png";
-import { Link } from "react-router-dom";
-function Footer({ scrollToTarget, scrollToContact }) {
-  const ScrolClick = () => {
-    scrollToTarget();
+import { Link, useNavigate } from "react-router-dom";
+function Footer() {
+  const navigate = useNavigate();
+  // Общая функция для перехода и прокрутки
+
+  const handleButtonClick = (page, sectionId) => {
+    navigate(page);
+
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Небольшая задержка для гарантии загрузки страницы
   };
-  const ScrollContact = () => {
-    scrollToContact();
-  };
+
   return (
     <div className="footer_block">
       <img src={img_footer} alt="" />
@@ -19,10 +27,10 @@ function Footer({ scrollToTarget, scrollToContact }) {
         <div className="main_footer">
           <Link to={"/catalog"}>Каталог</Link>
 
-          <Link onClick={ScrolClick} to={"/"}>
+          <Link onClick={() => handleButtonClick("/", "section1")} to={"/"}>
             Преимущества
           </Link>
-          <Link onClick={ScrollContact} to={"/"}>
+          <Link onClick={() => handleButtonClick("/", "section2")} to={"/"}>
             Наши контакты
           </Link>
         </div>

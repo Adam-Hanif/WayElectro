@@ -5,28 +5,28 @@ import "./Slick Slider/slick-theme.scss";
 import logo from "../../assets/images/logo_main.png";
 import basket from "../../assets/images/basket.svg";
 import burgerMenu from "../../assets/images/burger.png";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function Main({
-  burgerActive,
-  setBurgerActive,
-  scrollToTarget,
-  scrollToContact,
-}) {
+function Main({ burgerActive, setBurgerActive, scrollToTarget }) {
+  const navigate = useNavigate();
+
+  // Общая функция для перехода и прокрутки
+  const handleButtonClick = (page, sectionId) => {
+    navigate(page);
+
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Небольшая задержка для гарантии загрузки страницы
+  };
+
   const handleClick = () => {
     setBurgerActive(!burgerActive);
   };
 
-  const ScrolClick = () => {
-    scrollToTarget();
-  };
-  const ScrollContact = () => {
-    scrollToContact();
-  };
-
   const location = useLocation();
-
-  // const [scroll, setScroll] = React.useState("");
 
   return (
     <div>
@@ -41,12 +41,12 @@ function Main({
               <Link to={"/catalog"}>Каталог</Link>
             </li>
             <li>
-              <Link onClick={ScrolClick} to={"/"}>
+              <Link onClick={() => handleButtonClick("/", "section1")} to={"/"}>
                 Преимущества
               </Link>
             </li>
             <li>
-              <Link onClick={ScrollContact} to={"/"}>
+              <Link onClick={() => handleButtonClick("/", "section2")} to={"/"}>
                 Наши контакты
               </Link>
             </li>

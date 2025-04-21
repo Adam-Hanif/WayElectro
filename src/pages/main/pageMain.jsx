@@ -10,14 +10,6 @@ import MainBurger from "../../components/mainBurger/burger";
 function pageMain() {
   const [burgerActive, setBurgerActive] = React.useState(false);
 
-  const scrollToTarget = () => {
-    Advantages.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-  const scrollToContact = () => {
-    csrollCont.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-  const csrollCont = React.createRef();
-  const Advantages = React.createRef();
   return (
     <div>
       <div className="container">
@@ -25,30 +17,22 @@ function pageMain() {
           burgerActive={burgerActive}
           setBurgerActive={setBurgerActive}
         />
-        <Main
-          burgerActive={burgerActive}
-          setBurgerActive={setBurgerActive}
-          scrollToTarget={scrollToTarget}
-          scrollToContact={scrollToContact}
-        />
+        <Main />
         <SimpleSlider />
         <Range />
       </div>
 
       <div className="bg_advantage">
-        <div className="container">
-          <Advantage Advantages={Advantages} />
+        <div id="section1" className="container">
+          <Advantage />
         </div>
       </div>
-      <div className="container">
-        <Contact Advantages={csrollCont} />
+      <div id="section2" className="container">
+        <Contact />
       </div>
       <div className="footer_bg">
         <div className="container">
-          <Footer
-            scrollToTarget={scrollToTarget}
-            scrollToContact={scrollToContact}
-          />
+          <Footer />
         </div>
       </div>
     </div>
