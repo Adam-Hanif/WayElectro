@@ -2,14 +2,11 @@ import React from "react";
 import "./footer.scss";
 import logo from "../../../assets/images/logo-footer.png";
 import img_footer from "../../../assets/images/img-footer.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 function Footer() {
-  const navigate = useNavigate();
   // Общая функция для перехода и прокрутки
 
-  const handleButtonClick = (page, sectionId) => {
-    navigate(page);
-
+  const handleButtonClick = (__, sectionId) => {
     setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -25,12 +22,17 @@ function Footer() {
         <img src={logo} alt="" />
 
         <div className="main_footer">
-          <Link to={"/catalog"}>Каталог</Link>
+          <Link
+            onClick={() => handleButtonClick("__", "catalog")}
+            to={"/catalog"}
+          >
+            Каталог
+          </Link>
 
-          <Link onClick={() => handleButtonClick("/", "section1")} to={"/"}>
+          <Link onClick={() => handleButtonClick("__", "section1")} to={"/"}>
             Преимущества
           </Link>
-          <Link onClick={() => handleButtonClick("/", "section2")} to={"/"}>
+          <Link onClick={() => handleButtonClick("__", "section2")} to={"/"}>
             Наши контакты
           </Link>
         </div>

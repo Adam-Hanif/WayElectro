@@ -9,7 +9,7 @@ function Catalog() {
   return (
     <div>
       <Main />
-      <div className="block_catalog container">
+      <div id="catalog" className="block_catalog container">
         <InfoCatalog />
         <CatalogComp />
       </div>

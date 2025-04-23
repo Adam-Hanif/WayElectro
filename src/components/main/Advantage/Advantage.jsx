@@ -3,9 +3,9 @@ import "./Advantage.scss";
 import imgAdvantage from "../../../assets/images/img-advantage.png";
 import qualityImg from "../../../assets/images/quality_img.png";
 import { Link } from "react-router-dom";
-function Advantage({ Advantages }) {
+function Advantage() {
   return (
-    <div ref={Advantages} className="block_advantag">
+    <div className="block_advantag">
       <img className="icon_advantag" src={imgAdvantage} alt="" />
       <div className="item_advantage">
         <p>Почему выбирают нас</p>
