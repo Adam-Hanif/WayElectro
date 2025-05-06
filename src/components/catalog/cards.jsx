@@ -4,14 +4,14 @@ import { addItem } from "../../redux/slices/cartSlice";
 
 // import imgCard from "../../assets/images/imgRange.png";
 
-function Card({ id, name, text, price, imageUrl }) {
-  const cartItem = useSelector((state) =>
-    state.cartSlice.items.find((obj) => obj.id === id)
-  );
+function Card({ id, name, imageSrc }) {
+  // const cartItem = useSelector((state) =>
+  //   state.cartSlice.items.find((obj) => obj.id === id)
+  // );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const addedCount = cartItem ? cartItem.count : 0;
+  // const addedCount = cartItem ? cartItem.count : 0;
 
   return (
     <>
@@ -21,7 +21,7 @@ function Card({ id, name, text, price, imageUrl }) {
             <span /> В наличии
           </p>
           <div className="img-block">
-            <img src={imageUrl} alt="" />
+            <img src={imageSrc} alt="" />
           </div>
         </div>
         <div className="card-info">
@@ -38,15 +38,15 @@ function Card({ id, name, text, price, imageUrl }) {
           >
             Подробности
           </button> */}
-          <button
+          {/* <button
             className="card-btn-2"
             onClick={() =>
               dispatch(addItem({ id, name, price, text, imageUrl }))
             }
           >
             В корзину <span />
-          </button>
-          {addedCount > 0 && <i className="card-btn-2_count">{addedCount}</i>}
+          </button> */}
+          {/* {addedCount > 0 && <i className="card-btn-2_count">{addedCount}</i>} */}
         </div>
       </div>
     </>

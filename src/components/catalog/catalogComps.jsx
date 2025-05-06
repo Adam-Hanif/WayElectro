@@ -6,44 +6,17 @@ import { Link } from "react-router-dom";
 import Skeleton from "./skeleton";
 import Paginate from "../paginate";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCategoryId,
-  setPageCount,
-  setSearchValue,
-} from "../../redux/slices/filterSlice";
+
 import SearchInpute from "../searchInpute";
 import { fetchProducts } from "../../redux/slices/productSlice";
 
 function CatalogComps() {
-  const { categoryId, pageCount, searchValue } = useSelector(
-    (state) => state.filter
-  );
   const { items, status } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
-
-  const onChangeCategory = (id) => {
-    dispatch(setCategoryId(id));
-    dispatch(setPageCount(1));
-  };
-
-  const onChangePage = (page) => {
-    dispatch(setPageCount(page));
-    window.scrollTo(50, 500);
-  };
-
   React.useEffect(() => {
-    const Сategory = categoryId > 0 ? `category=${categoryId}` : "";
-    const Search = searchValue ? `search=${searchValue}` : "";
-
-    dispatch(
-      fetchProducts({
-        pageCount,
-        Сategory,
-        Search,
-      })
-    );
-  }, [categoryId, searchValue, pageCount]);
+    dispatch(fetchProducts());
+  }, []);
 
   return (
     <div className="block-catalog">
@@ -56,12 +29,7 @@ function CatalogComps() {
         <div className="search-filter">
           {catalogSearch.map((item, i) => (
             <Link key={i} to={"#"}>
-              <li
-                onClick={() => onChangeCategory(i)}
-                className={categoryId === i ? "active" : ""}
-              >
-                {item}
-              </li>
+              <li onClick={() => onChangeCategory(i)}>{item}</li>
             </Link>
           ))}
 
@@ -79,7 +47,6 @@ function CatalogComps() {
             : items.map((item) => <Card key={item.id} {...item} />)}
         </div>
       </div>
-      <Paginate pageCount={pageCount} onChangePage={onChangePage} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import debounce from "lodash.debounce";
 import exitIcon from "../../assets/images/exitIcon.svg";
-import { setSearchValue } from "../../redux/slices/filterSlice";
+// import { setSearchValue } from "../../redux/slices/filterSlice";
 function SearchInpute() {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();

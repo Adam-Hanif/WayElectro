@@ -41,7 +41,7 @@
 }
 .block-cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
   margin-top: 40px;
 
@@ -189,6 +189,6 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  gap: 12px;
   margin-left: 10px;
 }

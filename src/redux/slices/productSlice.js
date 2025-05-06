@@ -3,10 +3,11 @@ import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
-  async ({ Сategory, pageCount, Search }) => {
+  async () => {
     const { data } = await axios.get(
-      `https://66f81cf22a683ce9730eab97.mockapi.io/items?page=${pageCount}&limit=6&${Сategory}${Search}`
+      `https://way-electro-server.onrender.com/all-products`
     );
+
     return data;
   }
 );
@@ -21,7 +22,6 @@ const productSlice = createSlice({
   reducers: {
     setItems(state, action) {
       state.items = action.payload;
-      console.log(state.items);
     },
   },
   extraReducers: (builder) => {
