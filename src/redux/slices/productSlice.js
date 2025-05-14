@@ -1,12 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
-  async (categoryId) => {
+  async (id) => {
     const { data } = await axios.get(
       `https://way-electro-server.onrender.com/catalog`
     );
+
+    console.log(id);
+    
 
     return data;
   }
