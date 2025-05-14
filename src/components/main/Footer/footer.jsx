@@ -1,8 +1,8 @@
-import React from "react";
-import "./footer.scss";
-import logo from "../../../assets/images/logo-footer.png";
-import img_footer from "../../../assets/images/img-footer.png";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
+import img_footer from "../../../assets/images/img-footer.png"
+import logo from "../../../assets/images/logo-footer.png"
+import "./footer.scss"
 function Footer() {
   // Общая функция для перехода и прокрутки
 
@@ -12,7 +12,7 @@ function Footer() {
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
-    }, 100); // Небольшая задержка для гарантии загрузки страницы
+    }, 100); 
   };
 
   return (
