@@ -3,9 +3,9 @@ import axios from "axios";
 
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
-  async () => {
+  async (categoryId) => {
     const { data } = await axios.get(
-      `https://way-electro-server.onrender.com/all-products`
+      `https://way-electro-server.onrender.com/catalog`
     );
 
     return data;

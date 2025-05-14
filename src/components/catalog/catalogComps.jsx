@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./catalog.scss";
 import catalogSearch from "../../assets/json/catalog.json";
 import Card from "./cards";
@@ -14,6 +14,19 @@ function CatalogComps() {
   const { items, status } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
+  const onChangeCategory = (id) => {
+    if (id === 0) {
+      dispatch(fetchProducts());
+    } else {
+      const categoryItem = items.filter((item) => item.id === id);
+      const categoryId = categoryItem.map((item) => {
+        return item.id;
+      });
+
+      dispatch(fetchProducts(categoryId));
+      console.log(categoryItem);
+    }
+  };
   React.useEffect(() => {
     dispatch(fetchProducts());
   }, []);
@@ -27,9 +40,15 @@ function CatalogComps() {
       </div>
       <div className="block-cards">
         <div className="search-filter">
-          {catalogSearch.map((item, i) => (
+          {items.map((item, i) => (
             <Link key={i} to={"#"}>
-              <li onClick={() => onChangeCategory(i)}>{item}</li>
+              <li
+                onClick={() => {
+                  onChangeCategory(item.id);
+                }}
+              >
+                {item.name}
+              </li>
             </Link>
           ))}
 
