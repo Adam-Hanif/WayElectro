@@ -46,11 +46,8 @@
 
   .cards {
     display: grid;
-
     grid-template-columns: repeat(5, minmax(150px, 200px));
-    height: 100px;
     gap: 20px;
-    margin-left: 50px;
   }
   .card-item {
     display: flex;
@@ -59,9 +56,9 @@
     justify-content: space-between;
     .card-info {
       margin-top: 10px;
-
+      text-align: center;
       p {
-        font-size: 15px;
+        font-size: 12px;
       }
     }
     cursor: pointer;
@@ -79,7 +76,8 @@
         max-width: 100px;
         height: auto;
         margin-top: 20px;
-        align-items: center;
+        object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+        object-position: center; /* Центрирует изображение */
         overflow: hidden;
 
         img {
