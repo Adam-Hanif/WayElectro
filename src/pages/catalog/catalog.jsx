@@ -1,9 +1,9 @@
 import React from "react";
-import Main from "../../components/main/main";
+import Main from "../../widgets/main/main";
 import "./catalog.scss";
-import CatalogComp from "../../components/catalog/catalogComps";
-import Footer from "../../components/main/Footer/footer";
-import InfoCatalog from "../../components/catalog/infoCatalog";
+import CatalogComp from "./ui/catalogComps/catalogComps";
+import Footer from "../../widgets/Footer/footer";
+import InfoCatalog from "./ui/infoCatalog/infoCatalog";
 
 function Catalog() {
   return (
