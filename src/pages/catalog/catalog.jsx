@@ -1,9 +1,8 @@
-import React from "react";
-import Main from "../../widgets/main/main";
-import "./catalog.scss";
-import CatalogComp from "./ui/catalogComps/catalogComps";
-import Footer from "../../widgets/Footer/footer";
-import InfoCatalog from "./ui/infoCatalog/infoCatalog";
+import Main from "@/shared/ui/main/main";
+import "@/pages/catalog/catalog.scss";
+import Footer from "@/shared/ui/Footer/footer";
+import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog";
+import CatalogComps from "@/features/catalog/ui/catalogCard/catalogComps";
 
 function Catalog() {
   return (
@@ -11,7 +10,7 @@ function Catalog() {
       <Main />
       <div id="catalog" className="block_catalog container">
         <InfoCatalog />
-        <CatalogComp />
+        <CatalogComps />
       </div>
       <div className="footer_bg">
         <div className="container">

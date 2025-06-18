@@ -1,7 +1,6 @@
-import React from "react";
 import Slider from "react-slick";
-import imgSlider from "../../../../assets/images/Group633072.png";
-import photo from "../../../../assets/images/photo.png";
+import imgSlider from "@/shared/assets/images/Group633072.png";
+import photo from "@/shared/assets/images/photo.png";
 import { Link } from "react-router-dom";
 export function SimpleSlider() {
   var settings = {

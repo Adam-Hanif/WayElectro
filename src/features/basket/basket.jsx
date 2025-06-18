@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./basket.scss";
-import imgBasket from "../../assets/images/bsket-img.png";
-import Main from "../../widgets/main/main";
+import imgBasket from "@/shared/assets/images/bsket-img.png";
+import Main from "@/shared/ui/main/main";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
 import { sendOrderToTelegram } from "../../redux/slices/orderSlice";

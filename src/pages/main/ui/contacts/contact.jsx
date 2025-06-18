@@ -1,5 +1,5 @@
 import "./contacts.scss";
-import iconContact from "@/assets/images/icon-contact.png";
+import iconContact from "@/shared/assets/images/icon-contact.png";
 import { Link } from "react-router-dom";
 import Feedback from "./feedback";
 function Contact({ Advantages }) {

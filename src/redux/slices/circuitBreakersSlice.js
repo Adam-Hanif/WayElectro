@@ -5,15 +5,14 @@ import axios from "axios";
 export const fetchCircuitBreakers = createAsyncThunk(
   "CircuitBreakers/fetchBrand",
   async ({ id, param }) => {
-    console.log(param);
-
+    
     const { data } = await axios.get(
       `https://way-electro-server.onrender.com/${param}/${id}`
     );
-
     return data;
   }
 );
+
 
 const initialState = {
   itemCircuitBreakers: [],

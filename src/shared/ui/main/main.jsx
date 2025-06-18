@@ -2,9 +2,9 @@ import React from "react";
 import "./main.scss";
 import "slick-carousel/slick/slick.css";
 import "@/pages/main/ui/SlickSlider/slick-theme.scss";
-import logo from "@/assets/images/logo_main.png";
-import basket from "@/assets/images/basket.svg";
-import burgerMenu from "@/assets/images/burger.png";
+import logo from "@/shared/assets/images/logo_main.png";
+import basket from "@/shared/assets/images/basket.svg";
+import burgerMenu from "@/shared/assets/images/burger.png";
 import { Link, useLocation } from "react-router-dom";
 
 function Main({ burgerActive, setBurgerActive, scrollToTarget }) {

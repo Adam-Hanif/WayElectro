@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.scss";
-import logo from "@/assets/images/logo-footer.png";
-import img_footer from "@/assets/images/img-footer.png";
+import logo from "@/shared/assets/images/logo-footer.png";
+import img_footer from "@/shared/assets/images/img-footer.png";
 import { Link } from "react-router-dom";
 function Footer() {
   // Общая функция для перехода и прокрутки

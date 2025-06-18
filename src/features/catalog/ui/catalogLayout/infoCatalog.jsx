@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import imgRight from "../../assets/images/back.png";
+import imgRight from "@/shared/assets/images/back.png";
 function InfoCatalog() {
   return (
     <div>

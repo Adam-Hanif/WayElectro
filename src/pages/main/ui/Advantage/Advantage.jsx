@@ -1,6 +1,6 @@
 import "./Advantage.scss";
-import imgAdvantage from "@/assets/images/img-advantage.png";
-import qualityImg from "@/assets/images/quality_img.png";
+import imgAdvantage from "@/shared/assets/images/img-advantage.png";
+import qualityImg from "@/shared/assets/images/quality_img.png";
 import { Link } from "react-router-dom";
 function Advantage() {
   return (

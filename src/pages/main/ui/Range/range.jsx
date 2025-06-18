@@ -1,9 +1,9 @@
 import React from "react";
 import "./range.scss";
-import rangeLigo from "@/assets/images/txt.svg";
-import ImgСable from "@/assets/images/imgRange.png";
-import ImgСable2 from "@/assets/images/imgRange-2.png";
-import ImgСable3 from "@/assets/images/imgRange-3.png";
+import rangeLigo from "@/shared/assets/images/txt.svg";
+import ImgСable from "@/shared/assets/images/imgRange.png";
+import ImgСable2 from "@/shared/assets/images/imgRange-2.png";
+import ImgСable3 from "@/shared/assets/images/imgRange-3.png";
 import { Link } from "react-router-dom";
 function Range() {
   return (

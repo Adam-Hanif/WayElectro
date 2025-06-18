@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCircuitBreakers } from "../../redux/slices/circuitBreakersSlice";
+import { fetchCircuitBreakers } from "../../../../redux/slices/circuitBreakersSlice";
 
-function FilterSidebar({ setLoading }) {
+function filterSidebar({ setLoading }) {
   const { items, status } = useSelector((state) => state.product);
   console.log(items);
 
@@ -36,4 +36,4 @@ function FilterSidebar({ setLoading }) {
   );
 }
 
-export default FilterSidebar;
+export default filterSidebar;

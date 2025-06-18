@@ -1,6 +1,6 @@
 import React from "react";
 import "./burger.scss";
-import logo from "@/assets/images/logo.png";
+import logo from "@/shared/assets/images/logo.png";
 
 function MainBurger({ burgerActive, setBurgerActive }) {
   const handleClick = () => {
