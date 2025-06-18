@@ -4,7 +4,6 @@ import { fetchCircuitBreakers } from "../../../../redux/slices/circuitBreakersSl
 
 function filterSidebar({ setLoading }) {
   const { items, status } = useSelector((state) => state.product);
-  console.log(items);
 
   const dispatch = useDispatch();
 

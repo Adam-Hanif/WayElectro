@@ -5,11 +5,10 @@ import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
 import { useDispatch, useSelector } from "react-redux";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
-import { fetchProductsGet } from "../../model/api";
+import { fetchProducts } from "../../model/catalogSlice";
 
 function CatalogComps() {
   const { items, status } = useSelector((state) => state.product);
-  
 
   const { itemCircuitBreakers, statusCircuitBreakers } = useSelector(
     (state) => state.circuitBreakersSlice
@@ -20,7 +19,7 @@ function CatalogComps() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchProductsGet());
+    dispatch(fetchProducts());
   }, []);
 
   return (
