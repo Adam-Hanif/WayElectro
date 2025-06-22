@@ -5,7 +5,7 @@ import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
 import { useDispatch, useSelector } from "react-redux";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
-import { fetchProducts } from "../../model/catalogSlice";
+import { fetchProducts } from "../../model/slices/catalogSlice";
 
 function CatalogComps() {
   const { items, status } = useSelector((state) => state.product);
