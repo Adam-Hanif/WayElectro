@@ -9,7 +9,6 @@ import { fetchProducts } from "../../model/slices/catalogSlice";
 
 function CatalogComps() {
   const { items, status } = useSelector((state) => state.product);
-  console.log(items);
 
   const { itemCircuitBreakers, statusCircuitBreakers } = useSelector(
     (state) => state.circuitBreakersSlice

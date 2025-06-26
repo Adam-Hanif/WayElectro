@@ -1,7 +1,7 @@
 import React from "react";
 
 function cardCircuitBreakers({ id, image_src, name }) {
-  console.log(name);
+
 
   return (
     <div>
