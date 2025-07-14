@@ -4,16 +4,17 @@ import { fetchProductsGet } from "../api";
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
-    const data = await fetchProductsGet();
-
-    return data;
+    const response = await fetchProductsGet();
+    return response;
   }
 );
 
 const initialState = {
   items: [],
   status: "loading",
+  error: null,
 };
+
 const productSlice = createSlice({
   name: "product",
   initialState,
@@ -23,19 +24,20 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchProducts.pending, (state) => {
-      state.status = "loading";
-      state.items = [];
-    });
-    builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      state.items = action.payload;
-      state.status = "resolved";
-    });
-    builder.addCase(fetchProducts.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.payload;
-      state.items = [];
-    });
+    builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.status = "loading";
+        state.error = null; // Сбрасываем ошибку при новом запросе
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.status = "resolved";
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.payload; // Здесь будет сообщение об ошибке
+        state.items = [];
+      });
   },
 });
 

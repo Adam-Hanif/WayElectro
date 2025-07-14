@@ -8,10 +8,13 @@ import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import { fetchProducts } from "../../model/slices/catalogSlice";
 
 function CatalogComps() {
-  const { items, status } = useSelector((state) => state.product);
+  const { items, status } = useSelector(
+    (state) => state.catalogReducer.product
+  );
+  console.log(items);
 
   const { itemCircuitBreakers, statusCircuitBreakers } = useSelector(
-    (state) => state.circuitBreakersSlice
+    (state) => state.catalogReducer.circuitBreakersSlice
   );
 
   const [loading, setLoading] = useState(false);

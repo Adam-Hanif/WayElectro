@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCircuitBreakers } from "@/features/catalog/model/slices/circuitBreakersSlice";
+import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 
 function filterSidebar({ setLoading }) {
   const { items, status } = useSelector((state) => state.product);
