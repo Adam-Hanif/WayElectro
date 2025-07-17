@@ -3,9 +3,6 @@ function Card({ id, name, image_src }) {
     <>
       <div className="card-item">
         <div className="card-img">
-          <p>
-            <span /> В наличии
-          </p>
           <div className="img-block">
             <img src={image_src} alt="" />
           </div>

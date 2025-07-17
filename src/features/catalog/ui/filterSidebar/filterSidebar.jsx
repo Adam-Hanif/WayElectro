@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 
 function filterSidebar({ setLoading }) {
-  const { items, status } = useSelector((state) => state.product);
+  const { items, status } = useSelector(
+    (state) => state.catalogReducer.product
+  );
 
   const dispatch = useDispatch();
 
