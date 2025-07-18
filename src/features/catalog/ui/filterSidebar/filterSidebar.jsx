@@ -4,7 +4,7 @@ import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 
 function filterSidebar({ setLoading }) {
   const { items, status } = useSelector(
-    (state) => state.catalogReducer.product
+    (state) => state.catalogReducer.catalogAll
   );
 
   const dispatch = useDispatch();

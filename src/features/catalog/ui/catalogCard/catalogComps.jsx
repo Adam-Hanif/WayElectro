@@ -5,12 +5,16 @@ import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
 import { useDispatch, useSelector } from "react-redux";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
-import { fetchProducts } from "../../model/slices/catalogSlice";
+import { fetchCatalogAll } from "../../model/slices/catalogSlice";
+import { useLocation } from "react-router-dom";
 
 function CatalogComps() {
+  const location = useLocation();
+
   const { items, status } = useSelector(
-    (state) => state.catalogReducer.product
+    (state) => state.catalogReducer.catalogAll
   );
+
   console.log(items);
 
   const { itemCircuitBreakers, statusCircuitBreakers } = useSelector(
@@ -22,14 +26,14 @@ function CatalogComps() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchCatalogAll());
   }, []);
 
   return (
     <div className="block-catalog">
       <div className="sorting">
         <div className="sorting_input">
-          <SearchInpute />
+          {location.pathname === "/catalog" ? null : <SearchInpute />}
         </div>
       </div>
       <div className="block-cards">

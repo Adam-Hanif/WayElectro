@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchProductsGet } from "../api";
 
-export const fetchProducts = createAsyncThunk(
-  "product/fetchProducts",
+export const fetchCatalogAll = createAsyncThunk(
+  "catalogAll/fetchProducts",
   async () => {
-    const response = await fetchProductsGet();
-    return response;
+    const data = await fetchProductsGet();
+    return data;
   }
 );
 
@@ -15,8 +15,8 @@ const initialState = {
   error: null,
 };
 
-const productSlice = createSlice({
-  name: "product",
+const CatalogAllSlice = createSlice({
+  name: "catalogAll",
   initialState,
   reducers: {
     setItems(state, action) {
@@ -25,15 +25,15 @@ const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchCatalogAll.pending, (state) => {
         state.status = "loading";
         state.error = null; // Сбрасываем ошибку при новом запросе
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
+      .addCase(fetchCatalogAll.fulfilled, (state, action) => {
         state.items = action.payload;
         state.status = "resolved";
       })
-      .addCase(fetchProducts.rejected, (state, action) => {
+      .addCase(fetchCatalogAll.rejected, (state, action) => {
         state.status = "error";
         state.error = action.payload; // Здесь будет сообщение об ошибке
         state.items = [];
@@ -41,5 +41,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { setItems } = productSlice.actions;
-export default productSlice.reducer;
+export const { setItems } = CatalogAllSlice.actions;
+export default CatalogAllSlice.reducer;
