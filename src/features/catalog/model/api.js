@@ -7,3 +7,10 @@ export const fetchProductsGet = async () => {
 
   return data;
 };
+export const fetchAllProductsGet = async () => {
+  const { data } = await axios.get(
+    "https://way-electro-server.onrender.com/get_circuit_breakers_list"
+  );
+
+  return data;
+};
