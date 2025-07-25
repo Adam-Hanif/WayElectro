@@ -1,9 +1,8 @@
-import Main from "@/shared/ui/main/main";
+import CatalogComps from "@/features/catalog/ui/catalogCard/catalogComps";
+import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog";
 import "@/pages/catalog/catalog.scss";
 import Footer from "@/shared/ui/Footer/footer";
-import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog";
-import CatalogComps from "@/features/catalog/ui/catalogCard/catalogComps";
-import { useLocation } from "react-router-dom";
+import Main from "@/shared/ui/main/main";
 
 function Catalog() {
   return (

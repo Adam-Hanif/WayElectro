@@ -1,13 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const fetchCircuitBreakers = createAsyncThunk(
   "CircuitBreakers/fetchBrand",
-  async ({ id, param }) => {
+  async ({ id }) => {
     
     const { data } = await axios.get(
-      `https://way-electro-server.onrender.com/${param}/${id}`
+      `https://way-electro-server.onrender.com/get_circuit_breakers_list/${id}`
     );
     return data;
   }

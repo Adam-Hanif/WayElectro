@@ -1,23 +1,23 @@
-import React, { useState } from "react";
 import "@/pages/catalog/catalog.scss";
-import Card from "../catalogLayout/cards";
-import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
-import { useDispatch, useSelector } from "react-redux";
-import SearchInpute from "@features/catalog/ui/searchInpute";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
-import { fetchCatalogAll } from "../../model/slices/catalogSlice";
+import SearchInpute from "@features/catalog/ui/searchInpute";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { fetchCatalogAll } from "../../model/slices/catalogSlice";
+import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
+import Card from "../catalogLayout/cards";
 
 function CatalogComps() {
   const location = useLocation();
 
-  const { items, status } = useSelector(
+  const { items } = useSelector(
     (state) => state.catalogReducer.catalogAll
   );
 
-  console.log(items);
+  console.log(11);
 
-  const { itemCircuitBreakers, statusCircuitBreakers } = useSelector(
+  const { itemCircuitBreakers } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
 

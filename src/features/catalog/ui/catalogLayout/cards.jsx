@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+
 function Card({ id, name, image_src }) {
+
   return (
     <>
-      <div className="card-item">
+      <Link to={`/catalog/${id}`} className="card-item">
         <div className="card-img">
           <div className="img-block">
             <img src={image_src} alt="" />
@@ -10,7 +13,7 @@ function Card({ id, name, image_src }) {
         <div className="card-info">
           <p className="card-info_title">{name}</p>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
