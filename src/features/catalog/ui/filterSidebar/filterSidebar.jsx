@@ -9,8 +9,8 @@ function filterSidebar({ setLoading }) {
 
   const dispatch = useDispatch();
 
-  const onchangeSidebar = (id, param) => {
-    dispatch(fetchCircuitBreakers({ id, param }));
+  const onchangeSidebar = (id) => {
+    dispatch(fetchCircuitBreakers({ id}));
     setLoading(true);
   };
 
@@ -20,7 +20,7 @@ function filterSidebar({ setLoading }) {
         <li
           key={i}
           onClick={() => {
-            onchangeSidebar(item.id, item.url_param);
+            onchangeSidebar(item.id);
           }}
         >
           {item.name}
