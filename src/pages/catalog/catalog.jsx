@@ -1,9 +1,9 @@
-import React from "react";
-import Main from "../../components/main/main";
-import "./catalog.scss";
-import CatalogComp from "../../components/catalog/catalogComps";
-import Footer from "../../components/main/Footer/footer";
-import InfoCatalog from "../../components/catalog/infoCatalog";
+import Main from "@/shared/ui/main/main";
+import "@/pages/catalog/catalog.scss";
+import Footer from "@/shared/ui/Footer/footer";
+import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog";
+import CatalogComps from "@/features/catalog/ui/catalogCard/catalogComps";
+import { useLocation } from "react-router-dom";
 
 function Catalog() {
   return (
@@ -11,7 +11,7 @@ function Catalog() {
       <Main />
       <div id="catalog" className="block_catalog container">
         <InfoCatalog />
-        <CatalogComp />
+        <CatalogComps />
       </div>
       <div className="footer_bg">
         <div className="container">

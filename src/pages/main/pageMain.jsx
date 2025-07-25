@@ -1,11 +1,11 @@
-import Advantage from "../../components/main/Advantage/Advantage";
-import Footer from "../../components/main/Footer/footer";
-import Range from "../../components/main/Range/range";
-import SimpleSlider from "../../components/main/Slick Slider/SliderHeader";
-import Contact from "../../components/main/contacts/contact";
-import Main from "../../components/main/main";
+import Advantage from "./ui/Advantage/Advantage";
+import Footer from "../../shared/ui/Footer/footer";
+import Range from "./ui/Range/range";
+import { SimpleSlider } from "./ui/SlickSlider";
+import Contact from "./ui/contacts/contact";
+import Main from "../../shared/ui/main/main";
 import React from "react";
-import MainBurger from "../../components/mainBurger/burger";
+import MainBurger from "../../shared/ui/mainBurger/burger";
 
 function pageMain() {
   const [burgerActive, setBurgerActive] = React.useState(false);
