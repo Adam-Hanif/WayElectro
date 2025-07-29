@@ -10,7 +10,7 @@ function filterSidebar({ setLoading }) {
   const dispatch = useDispatch();
 
   const onchangeSidebar = (id) => {
-    dispatch(fetchCircuitBreakers({ id}));
+    dispatch(fetchCircuitBreakers({ id }));
     setLoading(true);
   };
 

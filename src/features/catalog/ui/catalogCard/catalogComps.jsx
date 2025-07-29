@@ -11,11 +11,7 @@ import Card from "../catalogLayout/cards";
 function CatalogComps() {
   const location = useLocation();
 
-  const { items } = useSelector(
-    (state) => state.catalogReducer.catalogAll
-  );
-
-  console.log(11);
+  const { items } = useSelector((state) => state.catalogReducer.catalogAll);
 
   const { itemCircuitBreakers } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
