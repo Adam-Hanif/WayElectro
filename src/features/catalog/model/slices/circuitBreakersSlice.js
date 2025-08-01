@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchCircuitBreakers = createAsyncThunk(
   "CircuitBreakers/fetchBrand",
   async ({ id }) => {
-    
     const { data } = await axios.get(
       `https://way-electro-server.onrender.com/get_circuit_breakers_list/${id}`
     );

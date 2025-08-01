@@ -1,11 +1,11 @@
 import "@/pages/catalog/catalog.scss";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
-import CardCircuitBreakers from "../catalogLayout/cardCircuitBreakers";
+import ProductCard from "../catalogLayout/ProductCard";
 import Card from "../catalogLayout/cards";
 
 function CatalogComps() {
@@ -17,7 +17,8 @@ function CatalogComps() {
     (state) => state.catalogReducer.circuitBreakersSlice
   );
 
-  const [loading, setLoading] = useState(false);
+  const isCatalog = location.pathname === "/catalog";
+  
 
   const dispatch = useDispatch();
 
@@ -34,12 +35,12 @@ function CatalogComps() {
       </div>
       <div className="block-cards">
         <div className="search-filter">
-          <FilterSidebar setLoading={setLoading} />
+          <FilterSidebar />
         </div>
         <div className="cards">
-          {loading
+          {!isCatalog
             ? itemCircuitBreakers.map((item, i) => (
-                <CardCircuitBreakers key={i} {...item} />
+                <ProductCard key={i} {...item} />
               ))
             : items.map((item, i) => <Card key={i} {...item} />)}
         </div>

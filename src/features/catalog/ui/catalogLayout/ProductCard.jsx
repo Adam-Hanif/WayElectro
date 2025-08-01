@@ -1,6 +1,5 @@
-import React from "react";
 
-function cardCircuitBreakers({ id, image_src, name }) {
+function ProductCard({ id, image_src, name }) {
   return (
     <div>
       <>
@@ -17,4 +16,4 @@ function cardCircuitBreakers({ id, image_src, name }) {
   );
 }
 
-export default cardCircuitBreakers;
+export default ProductCard;

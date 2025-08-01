@@ -1,8 +1,7 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 
-function filterSidebar({ setLoading }) {
+function filterSidebar() {
   const { items, status } = useSelector(
     (state) => state.catalogReducer.catalogAll
   );
@@ -11,7 +10,6 @@ function filterSidebar({ setLoading }) {
 
   const onchangeSidebar = (id) => {
     dispatch(fetchCircuitBreakers({ id }));
-    setLoading(true);
   };
 
   return (
