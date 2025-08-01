@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
+import { Link } from "react-router-dom";
 
 function filterSidebar() {
   const { items, status } = useSelector(
@@ -15,22 +16,17 @@ function filterSidebar() {
   return (
     <div>
       {items.map((item, i) => (
-        <li
-          key={i}
-          onClick={() => {
-            onchangeSidebar(item.id);
-          }}
-        >
-          {item.name}
-        </li>
+        <Link to={`/catalog/${item.id}`}>
+          <li
+            key={i}
+            onClick={() => {
+              onchangeSidebar(item.id);
+            }}
+          >
+            {item.name}
+          </li>
+        </Link>
       ))}
-      {/* <button
-        onClick={() => {
-          onChangeCategory(0);
-        }}
-      >
-        Сбросить фильтры
-      </button> */}
     </div>
   );
 }

@@ -8,7 +8,12 @@ function App() {
   return (
     <div className="wrapper">
       <Routes>
-        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog" element={<Catalog />}>
+          <Route path="/catalog/:id" element={<Catalog />} />
+        </Route>
+
+        <Route path="/catalog/:category/:subcategory" element={<Catalog />} />
+
         <Route path="/" element={<PageMain />} />
         <Route path="/basket" element={<Basket />} />
       </Routes>

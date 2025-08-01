@@ -3,13 +3,14 @@ import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
 import ProductCard from "../catalogLayout/ProductCard";
 import Card from "../catalogLayout/cards";
 
 function CatalogComps() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { items } = useSelector((state) => state.catalogReducer.catalogAll);
 
@@ -18,12 +19,13 @@ function CatalogComps() {
   );
 
   const isCatalog = location.pathname === "/catalog";
-  
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(fetchCatalogAll());
+
+    navigate("/catalog");
   }, []);
 
   return (
