@@ -118,9 +118,9 @@
     .card-info {
       margin-top: 10px;
       text-align: center;
-      p {
-        font-size: 12px;
-      }
+      color: #000000;
+      font-size: 13px;
+    
     }
     cursor: pointer;
 
@@ -169,9 +169,12 @@
   }
 }
 .search-filter {
-  padding: 20px 16px 20px 16px;
-  background-color: #f5f6f6;
+.block-filter{
+   padding: 20px 16px 20px 16px;
+    background-color: #f5f6f6;
   border-radius: 10px;
+
+}
   .active {
     font-weight: 600;
     color: #ff5400;

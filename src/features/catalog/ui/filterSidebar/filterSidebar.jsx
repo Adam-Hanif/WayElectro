@@ -14,7 +14,7 @@ function filterSidebar() {
   };
 
   return (
-    <div>
+    <div className="block-filter" >
       {items.map((item, i) => (
         <Link to={`/catalog/${item.id}`}>
           <li
