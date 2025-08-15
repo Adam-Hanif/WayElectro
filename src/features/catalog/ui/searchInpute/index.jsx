@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import debounce from "lodash.debounce";
 import exitIcon from "@shared/assets/images/exitIcon.svg";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 // import { setSearchValue } from "../../redux/slices/filterSlice";
 function SearchInpute() {
   const [value, setValue] = React.useState("");
@@ -28,6 +30,11 @@ function SearchInpute() {
   };
   return (
     <div>
+      <Dropdown
+        options={["option one", "option two", "option three"]}
+        placeholder="Бренды"
+      />
+
       <input
         ref={inputRef}
         value={value}

@@ -17,7 +17,7 @@ function CatalogComps() {
   const { itemCircuitBreakers } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
-
+  console.log(itemCircuitBreakers);
   const isCatalog = location.pathname === "/catalog";
 
   const dispatch = useDispatch();
