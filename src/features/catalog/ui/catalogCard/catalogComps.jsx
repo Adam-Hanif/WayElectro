@@ -13,11 +13,11 @@ function CatalogComps() {
   const navigate = useNavigate();
 
   const { items } = useSelector((state) => state.catalogReducer.catalogAll);
-
+  const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
   const { itemCircuitBreakers } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
-  console.log(itemCircuitBreakers);
+
   const isCatalog = location.pathname === "/catalog";
 
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ function CatalogComps() {
             ? itemCircuitBreakers.map((item, i) => (
                 <ProductCard key={i} {...item} />
               ))
-            : items.map((item, i) => <Card key={i} {...item} />)}
+            : sortedItems.map((item, i) => <Card key={i} {...item} />)}
         </div>
       </div>
     </div>

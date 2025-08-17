@@ -8,9 +8,9 @@ import "react-dropdown/style.css";
 function SearchInpute() {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();
-
   const inputRef = React.useRef();
 
+  const options = [];
   const onClckClear = () => {
     setValue("");
     setSearchValue("");
@@ -30,10 +30,7 @@ function SearchInpute() {
   };
   return (
     <div>
-      <Dropdown
-        options={["option one", "option two", "option three"]}
-        placeholder="Бренды"
-      />
+      <Dropdown options={options} placeholder="Бренды" />
 
       <input
         ref={inputRef}
