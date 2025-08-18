@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
+import { fetchBrand } from "../../model/slices/cartSliceBrand";
 
 function Card({ id, name, image_src }) {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ function Card({ id, name, image_src }) {
     <div
       onClick={() => {
         dispatch(fetchCircuitBreakers({ id }));
+        dispatch(fetchBrand({ id }));
       }}
     >
       <Link to={`/catalog/${id}`} className="card-item">

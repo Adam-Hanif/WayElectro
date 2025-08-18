@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { fetchAllBrandsGet } from "../api";
 
 export const fetchBrand = createAsyncThunk(
   "cartBrand/fetchBrand",
-  async (id) => {
-    const { data } = await axios.get(
-      `https://way-electro-server.onrender.com/circuit_breakers_brands/${id}`
-    );
-
+  async ({ id }) => {
+    const data = await fetchAllBrandsGet(id);
     return data;
   }
 );

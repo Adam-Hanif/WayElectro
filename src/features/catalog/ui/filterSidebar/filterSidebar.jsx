@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 import { Link } from "react-router-dom";
+import { fetchBrand } from "../../model/slices/cartSliceBrand";
 
 function filterSidebar() {
   const { items, status } = useSelector(
@@ -8,14 +9,10 @@ function filterSidebar() {
   );
   const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
   const dispatch = useDispatch();
-  const ass = items.map((item) => {
-    return item.name;
-  });
-
-  console.log(ass);
 
   const onchangeSidebar = (id) => {
     dispatch(fetchCircuitBreakers({ id }));
+    dispatch(fetchBrand({ id }));
   };
 
   return (

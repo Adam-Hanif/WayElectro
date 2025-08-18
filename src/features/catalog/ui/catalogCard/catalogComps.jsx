@@ -1,16 +1,22 @@
 import "@/pages/catalog/catalog.scss";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
 import ProductCard from "../catalogLayout/ProductCard";
 import Card from "../catalogLayout/cards";
+import Pagination from "../catalogLayout/paginate";
 
 function CatalogComps() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Состояние для пагинации
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 15; // Количество элементов на странице
 
   const { items } = useSelector((state) => state.catalogReducer.catalogAll);
   const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
@@ -20,13 +26,21 @@ function CatalogComps() {
 
   const isCatalog = location.pathname === "/catalog";
 
-  const dispatch = useDispatch();
-
   React.useEffect(() => {
     dispatch(fetchCatalogAll());
-
     navigate("/catalog");
   }, []);
+
+  // Функция для обработки смены страницы
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  // Вычисляем данные для текущей страницы
+  const dataToDisplay = !isCatalog ? itemCircuitBreakers : sortedItems;
+  const pageCount = Math.ceil(dataToDisplay.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
+  const currentItems = dataToDisplay.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="block-catalog">
@@ -40,12 +54,19 @@ function CatalogComps() {
           <FilterSidebar />
         </div>
         <div className="cards">
-          {!isCatalog
-            ? itemCircuitBreakers.map((item, i) => (
-                <ProductCard key={i} {...item} />
-              ))
-            : sortedItems.map((item, i) => <Card key={i} {...item} />)}
+          {currentItems.map((item, i) =>
+            !isCatalog ? (
+              <ProductCard key={i} {...item} />
+            ) : (
+              <Card key={i} {...item} />
+            )
+          )}
         </div>
+      </div>
+      <div className="block_plaginate">
+        {!isCatalog ? (
+          <Pagination pageCount={pageCount} handlePageClick={handlePageClick} />
+        ) : null}
       </div>
     </div>
   );

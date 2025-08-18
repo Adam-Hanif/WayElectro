@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React from "react";
 import debounce from "lodash.debounce";
 import exitIcon from "@shared/assets/images/exitIcon.svg";
@@ -9,8 +9,14 @@ function SearchInpute() {
   const [value, setValue] = React.useState("");
   const dispatch = useDispatch();
   const inputRef = React.useRef();
+  const { itemBrand, statusBrand } = useSelector(
+    (state) => state.catalogReducer.cartBrandSlice
+  );
 
-  const options = [];
+  const options = itemBrand.map((item) => {
+    return item.Name;
+  });
+
   const onClckClear = () => {
     setValue("");
     setSearchValue("");
