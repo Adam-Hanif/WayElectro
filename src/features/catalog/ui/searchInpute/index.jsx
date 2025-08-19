@@ -16,6 +16,7 @@ function SearchInpute() {
   const options = itemBrand.map((item) => {
     return item.Name;
   });
+  const options2 = ["1", "2", "3", "4"];
 
   const onClckClear = () => {
     setValue("");
@@ -35,20 +36,37 @@ function SearchInpute() {
     updaraSearchValue(event.target.value);
   };
   return (
-    <div>
-      <Dropdown options={options} placeholder="Бренды" />
-
-      <input
-        ref={inputRef}
-        value={value}
-        onChange={onChangeInput}
-        className="search"
-        type="text"
-        placeholder="Поиск по каталогу"
-      />
-      {value && (
-        <img onClick={onClckClear} className="exitIcon" src={exitIcon} alt="" />
-      )}
+    <div className="block_search">
+      <div className="search_filter">
+        <Dropdown options={options} placeholder="Бренды" />
+      </div>
+      <div className="search_filter">
+        <Dropdown
+          onChange={(e) => {
+            console.log(e.value);
+          }}
+          options={options2}
+          placeholder="Количество полюсов"
+        />
+      </div>
+      <div className="search_input">
+        <input
+          ref={inputRef}
+          value={value}
+          onChange={onChangeInput}
+          className="search"
+          type="text"
+          placeholder="Поиск по каталогу"
+        />
+        {value && (
+          <img
+            onClick={onClckClear}
+            className="exitIcon"
+            src={exitIcon}
+            alt=""
+          />
+        )}
+      </div>
     </div>
   );
 }

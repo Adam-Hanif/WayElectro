@@ -63,14 +63,15 @@
   font-family: "Manrope", sans-serif;
   margin-top: 126px;
   .sorting {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    color: #868686;
-    font-size: 17px;
-    font-weight: 600;
-    align-items: center;
-
+    .block_search {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      color: #868686;
+      font-size: 17px;
+      font-weight: 600;
+      align-items: center;
+    }
     .sorting_input {
       position: relative;
       img {
@@ -85,7 +86,7 @@
     }
     .search {
       padding: 10px 200px 10px 40px;
-      border-radius: 15px;
+      border-radius: 10px;
       border: solid 1px #868686;
       margin-right: 80px;
 
@@ -253,5 +254,23 @@
         }
       }
     }
+  }
+}
+///////////////////////////////////
+.Dropdown-root {
+  min-width: 150px;
+  margin-right: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+  .Dropdown-control {
+    padding: 8px 28px 8px 20px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #000000;
+    border-radius: 7px;
+  }
+  .Dropdown-menu {
+    border-radius: 7px;
+    font-size: 14px;
   }
 }
