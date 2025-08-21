@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 
 function ProductCard({ id, image_src, name }) {
   return (
     <div>
-      <>
+      <Link to={`/catalog/${id}`}>
         <div className="card-item">
           <div className="card-img">
             <div className="img-block">
@@ -11,7 +12,7 @@ function ProductCard({ id, image_src, name }) {
           </div>
           <div className="card-info">{name}</div>
         </div>
-      </>
+      </Link>
     </div>
   );
 }

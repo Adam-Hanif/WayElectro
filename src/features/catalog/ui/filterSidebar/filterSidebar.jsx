@@ -1,36 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
+import { Link } from "react-router-dom";
+import { fetchBrand } from "../../model/slices/cartSliceBrand";
 
 function filterSidebar() {
   const { items, status } = useSelector(
     (state) => state.catalogReducer.catalogAll
   );
-
+  const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
   const dispatch = useDispatch();
 
   const onchangeSidebar = (id) => {
     dispatch(fetchCircuitBreakers({ id }));
+    dispatch(fetchBrand({ id }));
   };
 
   return (
-    <div>
-      {items.map((item, i) => (
-        <li
-          key={i}
-          onClick={() => {
-            onchangeSidebar(item.id);
-          }}
-        >
-          {item.name}
-        </li>
+    <div className="block-filter">
+      {sortedItems.map((item) => (
+        <Link to={`/catalog/${item.id}`} key={item.id}>
+          <li
+            onClick={() => {
+              onchangeSidebar(item.id);
+            }}
+          >
+            {item.name}
+          </li>
+        </Link>
       ))}
-      {/* <button
-        onClick={() => {
-          onChangeCategory(0);
-        }}
-      >
-        Сбросить фильтры
-      </button> */}
     </div>
   );
 }

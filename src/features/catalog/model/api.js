@@ -14,3 +14,11 @@ export const fetchAllProductsGet = async () => {
 
   return data;
 };
+
+export const fetchAllBrandsGet = async (id) => {
+  const { data } = await axios.get(
+    `https://way-electro-server.onrender.com/circuit_breakers_brands/${id}`
+  );
+
+  return data;
+};
