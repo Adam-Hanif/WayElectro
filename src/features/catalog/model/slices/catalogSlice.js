@@ -11,6 +11,7 @@ export const fetchCatalogAll = createAsyncThunk(
 
 const initialState = {
   items: [],
+
   status: "loading",
   error: null,
 };
@@ -22,12 +23,13 @@ const CatalogAllSlice = createSlice({
     setItems(state, action) {
       state.items = action.payload;
     },
+
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCatalogAll.pending, (state) => {
         state.status = "loading";
-        state.error = null; // Сбрасываем ошибку при новом запросе
+        state.error = null;
       })
       .addCase(fetchCatalogAll.fulfilled, (state, action) => {
         state.items = action.payload;
@@ -35,7 +37,7 @@ const CatalogAllSlice = createSlice({
       })
       .addCase(fetchCatalogAll.rejected, (state, action) => {
         state.status = "error";
-        state.error = action.payload; // Здесь будет сообщение об ошибке
+        state.error = action.payload;
         state.items = [];
       });
   },
