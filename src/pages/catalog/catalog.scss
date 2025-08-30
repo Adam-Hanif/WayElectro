@@ -115,7 +115,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    min-height: 150px;
+    min-height: 250px;
     padding: 10px;
     .card-info {
       margin-top: 10px;
@@ -167,6 +167,17 @@
         }
       }
     }
+    .btn_produktCard {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ff5400;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+    }
   }
 }
 .search-filter {
@@ -189,21 +200,6 @@
       transition: all 0.3s;
       color: #ff5400;
       font-family: 600;
-    }
-  }
-  button {
-    padding: 12px 30px 12px 30px;
-    margin-top: 30px;
-    border: none;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 10px #000000;
-    border-radius: 60px;
-    font-size: 15px;
-    color: rgb(12, 12, 12);
-    cursor: pointer;
-    &:hover {
-      transition: all 0.3s;
-      box-shadow: 0px 0px 10px #ff5400;
     }
   }
 }

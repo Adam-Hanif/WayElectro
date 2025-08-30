@@ -10,7 +10,10 @@ function ProductCard({ id, image_src, name }) {
               <img src={image_src} alt="" />
             </div>
           </div>
-          <div className="card-info">{name}</div>
+          <div>
+            <div className="card-info">{name}</div>
+            <button className="btn_produktCard">Купить</button>
+          </div>
         </div>
       </Link>
     </div>
