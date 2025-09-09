@@ -1,4 +1,3 @@
-import "@/pages/catalog/catalog.scss";
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import React, { useState } from "react";
@@ -6,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
 import ProductCard from "../catalogLayout/ProductCard";
-import Card from "../catalogLayout/cards";
-import Pagination from "../catalogLayout/paginate";
+import Card from "../catalogLayout/cards/cards";
+import Pagination from "../catalogLayout/paginate/paginate";
+import "./catalogComps.scss";
 
 function CatalogComps() {
   const location = useLocation();

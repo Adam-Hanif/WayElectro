@@ -7,9 +7,9 @@ import { addItem, minusItem, removeItem } from "../../redux/slices/cartSlice";
 import { sendOrderToTelegram } from "../../redux/slices/orderSlice";
 
 function Basket() {
-  const items = useSelector((state) => state.cartSlice.items);
+  const items = useSelector((state) => state.catalogReducer.cartSlice.items);
   const dispatch = useDispatch();
-  const totalPrice = useSelector((state) => state.cartSlice.totalPrice);
+  // const totalPrice = useSelector((state) => state.cartSlice.totalPrice);
   const { loading, error, success } = useSelector(
     (state) => state.orderReducer
   );
@@ -27,7 +27,7 @@ function Basket() {
     const orderData = {
       customer: formData,
       products: items,
-      totalPrice,
+      // totalPrice,
     };
 
     dispatch(sendOrderToTelegram(orderData));
@@ -109,7 +109,7 @@ function Basket() {
         </div>
         <div className="total-price">
           <p>Итого:</p>
-          <span>{totalPrice} ₽</span>
+          {/* <span>{totalPrice} ₽</span> */}
         </div>
         <div className="basket-pre-order">
           <form onSubmit={handleSubmit} className="form">

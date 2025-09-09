@@ -4,6 +4,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import debounce from "lodash.debounce";
 import exitIcon from "@shared/assets/images/exitIcon.svg";
+import "./searchInpute.scss";
 import {
   fetchCircuitBreakers,
   setFilter,

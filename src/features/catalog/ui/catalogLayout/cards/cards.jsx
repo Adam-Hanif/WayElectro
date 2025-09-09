@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
-import { fetchBrand } from "../../model/slices/cartSliceBrand";
+import { fetchCircuitBreakers } from "../../../model/slices/circuitBreakersSlice";
+import { fetchBrand } from "../../../model/slices/cartSliceBrand";
+import "./cards.scss";
 
 function Card({ id, name, image_src }) {
   const dispatch = useDispatch();

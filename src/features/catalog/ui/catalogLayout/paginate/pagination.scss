@@ -1,0 +1,50 @@
+.block_plaginate {
+  margin-bottom: 200px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 30px 0;
+  margin: 0;
+  gap: 8px;
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #ff5400;
+      color: white;
+      border-color: #ff5400;
+    }
+  }
+
+  &__link--active {
+    background-color: #ff5400;
+    color: white !important;
+    border-color: #ff5400;
+  }
+
+  &__link--disabled {
+    color: #ccc;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      color: #ccc;
+      border-color: #e0e0e0;
+    }
+  }
+}

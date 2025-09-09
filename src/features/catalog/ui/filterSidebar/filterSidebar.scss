@@ -1,0 +1,30 @@
+.search-filter {
+  flex: 0 0 220px;
+  position: sticky;
+  top: 100px;
+
+  .block-filter {
+    padding: 20px 16px;
+    background-color: #f5f6f6;
+    border-radius: 10px;
+  }
+
+  .active {
+    font-weight: 600;
+    color: #ff5400;
+  }
+
+  li {
+    max-width: 220px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: #242424;
+    cursor: pointer;
+
+    &:hover {
+      transition: all 0.3s;
+      color: #ff5400;
+      font-weight: 600;
+    }
+  }
+}

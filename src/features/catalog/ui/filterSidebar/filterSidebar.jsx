@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCircuitBreakers } from "../../model/slices/circuitBreakersSlice";
 import { Link } from "react-router-dom";
 import { fetchBrand } from "../../model/slices/cartSliceBrand";
+import "./filterSidebar.scss";
 
 function filterSidebar() {
   const { items, status } = useSelector(

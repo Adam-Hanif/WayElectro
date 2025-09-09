@@ -1,6 +1,6 @@
 import CatalogComps from "@/features/catalog/ui/catalogCard/catalogComps";
-import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog";
-import "@/pages/catalog/catalog.scss";
+import InfoCatalog from "@/features/catalog/ui/catalogLayout/infoCatalog/infoCatalog";
+
 import Footer from "@/shared/ui/Footer/footer";
 import Main from "@/shared/ui/main/main";
 

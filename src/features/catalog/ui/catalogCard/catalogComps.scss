@@ -1,0 +1,24 @@
+/* Основной контейнер каталога */
+.block-catalog {
+  display: flex;
+  flex-direction: column;
+  font-family: "Manrope", sans-serif;
+  margin-top: 126px;
+}
+
+/*------------------------------------------*/
+/* Сайдбар + карточки */
+.block-cards {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+/* Сетка карточек */
+.cards {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  min-height: 600px;
+}
