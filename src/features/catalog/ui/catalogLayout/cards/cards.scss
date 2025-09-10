@@ -39,16 +39,19 @@
   }
 
   .card-info {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    text-align: center;
-    color: #333;
+    text-align: start;
+    color: #333333cb;
     margin-bottom: 15px;
     line-height: 1.3;
   }
 }
 
 /* Кнопки */
+.btn_item {
+  width: 100%;
+}
 .btn_produktCard {
   margin-bottom: 10px;
   flex: 1;
@@ -66,7 +69,7 @@
   }
 
   &:not(.btn_details) {
-    background-color: #ff5400;
+    background-color: #242424;
     color: #fff;
 
     &:hover {
@@ -85,16 +88,15 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: #ff5400;
   border-radius: 12px;
   overflow: hidden;
 
   button {
-    flex: 0 0 40px;
+    flex: 0 0 30px;
     padding: 12px 0;
-    background-color: #ff5400;
-    color: #fff;
-    font-size: 18px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 14px;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -113,10 +115,12 @@
     flex: 1;
     text-align: center;
     border: none;
+
     outline: none;
     font-size: 15px;
+
     background: transparent;
-    color: #fff;
+    color: #000000;
     -moz-appearance: textfield;
     max-width: 60px;
 
@@ -131,7 +135,7 @@
     flex: 0 0 auto;
     padding: 0 8px;
     font-size: 15px;
-    color: #fff;
+    color: #000000;
     font-weight: 600;
   }
 }
