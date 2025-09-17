@@ -1,7 +1,7 @@
+/* Карточка товара */
 .card-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
   background: #fff;
   border-radius: 15px;
   padding: 15px;
@@ -10,132 +10,135 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
   box-sizing: border-box;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .card-img {
-    width: 140px;
-    height: 140px;
-    overflow: hidden;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-  }
-
-  &:hover .card-img img {
-    transform: scale(1.1);
-  }
-
-  .card-info {
-    font-size: 13px;
-    font-weight: 600;
-    text-align: start;
-    color: #333333cb;
-    margin-bottom: 15px;
-    line-height: 1.3;
-  }
 }
 
-/* Кнопки */
-.btn_item {
+.card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Изображение товара */
+.card-img {
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-img img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
-.btn_produktCard {
+
+.card-item:hover .card-img img {
+  transform: scale(1.1);
+}
+
+/* Название товара */
+.card-info {
+  font-size: 13px;
+  font-weight: 600;
+  text-align: start;
+  color: #333333cb;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+/* Артикул или доп. текст */
+.cardArt {
+  text-align: start;
+  font-size: 12px;
   margin-bottom: 10px;
+  color: #00000088;
+}
+
+/* Счётчик товара */
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100px;
+  height: 30px;
+  background: #f9f9f9;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.quantity button {
   flex: 1;
+  height: 100%;
+  border: none;
+  background: #f1f1f1;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.quantity button:hover {
+  background: #e0e0e0;
+}
+
+.quantity button:active {
+  transform: scale(0.95);
+}
+
+.quantity input {
+  width: 50px;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  background: #fff;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.quantity input::-webkit-outer-spin-button,
+.quantity input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Кнопка "В корзину" */
+.add-to-cart {
   width: 100%;
   padding: 12px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   border-radius: 12px;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
-
-  &.btn_details:hover {
-    background-color: #ccc;
-  }
-
-  &:not(.btn_details) {
-    background-color: #242424;
-    color: #fff;
-
-    &:hover {
-      background-color: #e04800;
-    }
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
+  margin-top: 10px;
+  background-color: #242424;
+  color: #fff;
 }
 
-/* Счётчик */
-.counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+.add-to-cart:hover {
+  background-color: #e04800;
+}
 
-  button {
-    flex: 0 0 30px;
-    padding: 12px 0;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+.add-to-cart:active {
+  transform: scale(0.97);
+}
 
-    &:hover {
-      background-color: #e04800;
-    }
+/* Кнопка, если товар уже в корзине */
+.add-to-cart.in-cart {
+  background-color: #4caf50;
+  color: #fff;
+}
 
-    &:active {
-      transform: scale(0.9);
-    }
-  }
-
-  input {
-    flex: 1;
-    text-align: center;
-    border: none;
-
-    outline: none;
-    font-size: 15px;
-
-    background: transparent;
-    color: #000000;
-    -moz-appearance: textfield;
-    max-width: 60px;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  }
-
-  span {
-    flex: 0 0 auto;
-    padding: 0 8px;
-    font-size: 15px;
-    color: #000000;
-    font-weight: 600;
-  }
+.add-to-cart.in-cart:hover {
+  background-color: #45a049;
 }

@@ -1,76 +1,79 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  increaseCount,
-  decreaseCount,
-  setCount,
-} from "../../model/slices/cartSlice";
+import { addToCart, setCount } from "../../model/slices/cartSlice";
 
-function ProductCard({ id, image_src, name, unit = "шт", price }) {
+function ProductCard({ id, image_src, name, unit = "шт" }) {
   const dispatch = useDispatch();
-  const cartItems = useSelector(
-    (state) => state.catalogReducer.cartSlice.items
+  const cartItem = useSelector((state) =>
+    state.catalogReducer.cartSlice.items.find((item) => item.id === id)
   );
 
-  const existingItem = cartItems.find((item) => item.id === id);
-  const count = existingItem ? existingItem.count : 0;
-  const isBuying = count > 0;
-
-  const handleBuyClick = (e) => {
-    e.preventDefault();
-    if (!isBuying) {
-      dispatch(addToCart({ id, name, image_src, unit }));
-    }
-  };
+  const [localCount, setLocalCount] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleIncrease = () => {
-    dispatch(increaseCount(id));
+    setLocalCount(prev => prev + 1);
+    setAddedToCart(false);
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseCount(id));
+    if (localCount > 1) {
+      setLocalCount(prev => prev - 1);
+      setAddedToCart(false);
+    }
   };
 
   const handleInputChange = (e) => {
-    let value = parseInt(e.target.value, 10);
-    if (isNaN(value) || value < 0) value = 0;
-    dispatch(setCount({ id, count: value }));
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value >= 1) {
+      setLocalCount(value);
+      setAddedToCart(false);
+    }
   };
+
+const handleAddToCart = () => {
+  if (cartItem) {
+    // Обновляем существующий товар до значения из input
+    dispatch(setCount({ id, count: localCount }));
+  } else {
+    // Добавляем новый товар с количеством из input
+    dispatch(addToCart({ id, name, image_src, unit, count: localCount }));
+  }
+  setAddedToCart(true);
+};
 
   return (
     <div className="card-item">
       <Link to={`/catalog/${id}`}>
         <div className="card-img">
-          <img src={image_src} alt={name} />
+          <div className="img-block">
+            <img src={image_src} alt={name} />
+          </div>
         </div>
         <div className="card-info">{name}</div>
       </Link>
 
-      {!isBuying ? (
-        <div className="btn_item">
-          <div>Артикуль {}</div>
-          <button className="btn_produktCard" onClick={handleBuyClick}>
-            Купить
-          </button>
-        </div>
-      ) : (
-        <div className="btn_item">
-          <div>Артикуль {}</div>
-          <div className="counter">
-            <button onClick={handleDecrease}>-</button>
-            <input
-              type="number"
-              min="0"
-              value={count}
-              onChange={handleInputChange}
-            />
-            <span>{unit}</span>
-            <button onClick={handleIncrease}>+</button>
-          </div>
-        </div>
-      )}
+      {/* Счётчик */}
+      <div className="quantity">
+        <button type="button" onClick={handleDecrease}>-</button>
+        <input
+          type="number"
+          min="1"
+          value={localCount}
+          onChange={handleInputChange}
+        />
+        <button type="button" onClick={handleIncrease}>+</button>
+      </div>
+
+      {/* Кнопка "В корзину" */}
+      <button
+        type="button"
+        className={`add-to-cart ${addedToCart ? "in-cart" : ""}`}
+        onClick={handleAddToCart}
+      >
+        {addedToCart ? "В корзине ✔" : "В корзину"}
+      </button>
     </div>
   );
 }
