@@ -7,18 +7,23 @@ const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-      const { id, name, image_src, unit } = action.payload;
+      const { id, name, image_src, unit, count } = action.payload;
       const existing = state.items.find((item) => item.id === id);
+
       if (existing) {
-        existing.count += 1;
+        // Если товар есть — увеличиваем на введённое количество
+        existing.count += count;
       } else {
-        state.items.push({ id, name, image_src, unit, count: 1 });
+        // Если товара нет — добавляем с указанным count
+        state.items.push({ id, name, image_src, unit, count });
       }
     },
+
     increaseCount: (state, action) => {
       const item = state.items.find((i) => i.id === action.payload);
       if (item) item.count += 1;
     },
+
     decreaseCount: (state, action) => {
       const item = state.items.find((i) => i.id === action.payload);
       if (item) {
@@ -29,6 +34,7 @@ const cartSlice = createSlice({
         }
       }
     },
+
     setCount: (state, action) => {
       const { id, count } = action.payload;
       const item = state.items.find((i) => i.id === id);
