@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCircuitBreakers } from "../../../model/slices/circuitBreakersSlice";
+import { fetchCircuitBreakers } from "../../../model/slices/slicesFiltr/circuitBreakersSlice";
 import { fetchBrand } from "../../../model/slices/cartSliceBrand";
 import "./cards.scss";
 

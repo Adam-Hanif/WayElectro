@@ -9,7 +9,7 @@ import {
   fetchCircuitBreakers,
   setFilter,
   clearFilter,
-} from "../../model/slices/circuitBreakersSlice";
+} from "../../model/slices/slicesFiltr/circuitBreakersSlice";
 
 function SearchInpute() {
   const dispatch = useDispatch();
