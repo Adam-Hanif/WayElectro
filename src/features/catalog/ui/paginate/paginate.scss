@@ -1,25 +1,56 @@
-.paginate {
+.block_plaginate {
+  margin-bottom: 200px;
+}
+
+.pagination {
   display: flex;
   justify-content: center;
-  .selected {
-    color: #ff5400;
-    border-bottom: solid;
-  }
-  li {
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    align-items: center;
-    margin-right: 10px;
-    margin-bottom: 100px;
-    cursor: pointer;
+  list-style: none;
+  padding: 30px 0;
+  margin: 0;
+  gap: 8px;
 
-    a {
-      font-size: 25px;
-      &:hover {
-        color: #ff5400;
-        transition: 0.5s;
-      }
+  &__item {
+    list-style: none;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #ff5400;
+      color: #fff;
+      border-color: #ff5400;
+    }
+  }
+
+  .is-active .pagination__link,
+  &__link--active {
+    background-color: #ff5400;
+    color: #fff !important;
+    border-color: #ff5400;
+  }
+
+  .is-disabled .pagination__link,
+  &__link--disabled {
+    color: #ccc;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      color: #ccc;
+      border-color: #e0e0e0;
     }
   }
 }

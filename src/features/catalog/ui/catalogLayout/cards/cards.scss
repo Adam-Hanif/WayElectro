@@ -1,64 +1,77 @@
-/* Карточка товара */
+/* Сетка карточек — все ячейки одинаковой высоты */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  align-items: stretch; /* ключ */
+}
+
+/* Карточка заполняет всю высоту ячейки и «кнопка внизу» */
 .card-item {
   display: flex;
   flex-direction: column;
   background: #fff;
   border-radius: 15px;
   padding: 15px;
-  min-height: 300px;
+  overflow: hidden; /* чтобы ничего не вылезало */
+  position: relative;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 
 .card-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
 }
 
-/* Изображение товара */
+/* Ссылка оборачивает верхнюю часть, но не кнопку */
+.card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ЕДИНЫЙ размер изображения в карточке */
 .card-img {
-  width: 140px;
-  height: 140px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 15px;
+
+  margin-bottom: 10px;
+  flex-shrink: 0;
+  position: relative;
 }
 
 .card-img img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease;
+  object-fit: contain; /* ← было cover */
+  object-position: center; /* можно 'top' если нужно выравнивать по верху */
+  transition: none; /* без масштабирования, чтобы не резалось */
 }
-
+/* эффект наведения */
 .card-item:hover .card-img img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-/* Название товара */
+/* Название — фиксируем высоту (2 строки) */
 .card-info {
   font-size: 13px;
   font-weight: 600;
-  text-align: start;
   color: #333333cb;
-  margin-bottom: 15px;
   line-height: 1.3;
+  margin-bottom: 12px;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.3em * 2); /* совпадает с 2 строками */
 }
 
-/* Артикул или доп. текст */
-.cardArt {
-  text-align: start;
-  font-size: 12px;
-  margin-bottom: 10px;
-  color: #00000088;
-}
-
-/* Счётчик товара */
+/* Счётчик */
 .quantity {
   display: flex;
   align-items: center;
@@ -70,7 +83,6 @@
   height: 30px;
   background: #f9f9f9;
   margin-bottom: 12px;
-  align-items: center;
 }
 
 .quantity button {
@@ -110,8 +122,9 @@
   margin: 0;
 }
 
-/* Кнопка "В корзину" */
+/* Кнопка прижата вниз карточки */
 .add-to-cart {
+  margin-top: auto; /* ключ: фиксирует кнопку внизу */
   width: 100%;
   padding: 12px;
   font-size: 14px;
@@ -120,7 +133,6 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
-  margin-top: 10px;
   background-color: #242424;
   color: #fff;
 }
@@ -130,13 +142,11 @@
 }
 
 .add-to-cart:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Кнопка, если товар уже в корзине */
 .add-to-cart.in-cart {
   background-color: #4caf50;
-  color: #fff;
 }
 
 .add-to-cart.in-cart:hover {

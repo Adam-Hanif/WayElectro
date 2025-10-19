@@ -1,23 +1,36 @@
-import React from "react";
-import "./paginate.scss";
+// components/catalogLayout/paginate/paginate.jsx
 import ReactPaginate from "react-paginate";
 
-function Paginate({ pageCount, onChangePage }) {
+const Pagination = ({ pageCount, currentPage, handlePageClick }) => {
   return (
-    <div>
-      <ReactPaginate
-        className="paginate"
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={(e) => onChangePage(e.selected + 1)}
-        pageRangeDisplayed={6}
-        pageCount={4}
-        forcePage={pageCount - 1}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-      />
-    </div>
+    <ReactPaginate
+      previousLabel={"←"}
+      nextLabel={"→"}
+      breakLabel={"..."}
+      pageCount={pageCount}
+      onPageChange={handlePageClick}
+      // ВАЖНО: делаем управляемой, чтобы UI всегда совпадал со стейтом
+      forcePage={currentPage}
+      // Немного удобств
+      marginPagesDisplayed={1}
+      pageRangeDisplayed={3}
+      renderOnZeroPageCount={null}
+      // Классы
+      containerClassName={"pagination"}
+      pageClassName={"pagination__item"} // <li>
+      pageLinkClassName={"pagination__link"} // <a>
+      previousClassName={"pagination__item"}
+      nextClassName={"pagination__item"}
+      previousLinkClassName={"pagination__link pagination__link--prev"}
+      nextLinkClassName={"pagination__link pagination__link--next"}
+      breakClassName={"pagination__item"}
+      breakLinkClassName={"pagination__link"}
+      activeClassName={"is-active"} // на <li>
+      activeLinkClassName={"pagination__link--active"}
+      disabledClassName={"is-disabled"} // на <li>
+      disabledLinkClassName={"pagination__link--disabled"}
+    />
   );
-}
+};
 
-export default Paginate;
+export default Pagination;

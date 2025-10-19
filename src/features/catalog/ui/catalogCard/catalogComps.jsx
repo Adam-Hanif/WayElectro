@@ -1,6 +1,6 @@
 import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
@@ -14,58 +14,85 @@ function CatalogComps() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Состояние для пагинации
+  // ссылка на блок с карточками
+  const cardsRef = useRef(null);
+
+  // Состояние пагинации
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 15; // Количество элементов на странице
+  const itemsPerPage = 15;
 
   const { items } = useSelector((state) => state.catalogReducer.catalogAll);
-  const sortedItems = [...items].sort((a, b) => a.name.localeCompare(b.name));
   const { itemCircuitBreakers } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
 
   const isCatalog = location.pathname === "/catalog";
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchCatalogAll());
-    navigate("/catalog");
-  }, []);
+  }, [dispatch]);
 
-  // Функция для обработки смены страницы
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
+  // Мемоизация списка
+  const dataToDisplay = useMemo(() => {
+    const base = isCatalog
+      ? [...items].sort((a, b) => a.name.localeCompare(b.name))
+      : itemCircuitBreakers;
+    return base ?? [];
+  }, [isCatalog, items, itemCircuitBreakers]);
 
-  // Вычисляем данные для текущей страницы
-  const dataToDisplay = !isCatalog ? itemCircuitBreakers : sortedItems;
-  const pageCount = Math.ceil(dataToDisplay.length / itemsPerPage);
+  const pageCount = Math.max(1, Math.ceil(dataToDisplay.length / itemsPerPage));
   const offset = currentPage * itemsPerPage;
   const currentItems = dataToDisplay.slice(offset, offset + itemsPerPage);
+
+  // Сброс страницы при смене данных
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [isCatalog, dataToDisplay.length]);
+
+  // При клике на номер страницы
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+
+    // прокрутка плавно к блоку карточек
+    if (cardsRef.current) {
+      const offsetTop =
+        cardsRef.current.getBoundingClientRect().top + window.scrollY - 120;
+      // -120 = отступ от верха (можно поменять)
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="block-catalog">
       <div className="sorting">
         <div className="sorting_input">
-          {location.pathname === "/catalog" ? null : <SearchInpute />}
+          {isCatalog ? null : <SearchInpute />}
         </div>
       </div>
+
       <div className="block-cards">
         <div className="search-filter">
           <FilterSidebar />
         </div>
-        <div className="cards">
-          {currentItems.map((item, i) =>
+
+        <div className="cards" ref={cardsRef}>
+          {currentItems.map((item) =>
             !isCatalog ? (
-              <ProductCard key={i} {...item} />
+              <ProductCard key={item.id} {...item} />
             ) : (
-              <Card key={i} {...item} />
+              <Card key={item.id} {...item} />
             )
           )}
         </div>
       </div>
+
       <div className="block_plaginate">
         {!isCatalog ? (
-          <Pagination pageCount={pageCount} handlePageClick={handlePageClick} />
+          <Pagination
+            pageCount={pageCount}
+            currentPage={currentPage}
+            handlePageClick={handlePageClick}
+          />
         ) : null}
       </div>
     </div>
