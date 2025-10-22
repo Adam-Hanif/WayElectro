@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,47 +10,65 @@ import {
 function ProductCard({ id, image_src, name, unit = "шт" }) {
   const dispatch = useDispatch();
 
-  // Проверяем, есть ли этот товар в корзине
+  // товар из корзины (если есть)
   const cartItem = useSelector((state) =>
     state.catalogReducer.cartSlice.items.find((i) => i.id === id)
   );
-  const inCart = !!cartItem; // true — если товар уже добавлен
+  const inCart = !!cartItem;
 
-  // Локальное состояние количества
+  // локальное количество
   const [localCount, setLocalCount] = useState(1);
 
-  // Если товар уже в корзине — подставляем его количество
+  // синхронизация локального количества с корзиной
   useEffect(() => {
     if (cartItem?.count > 0) setLocalCount(cartItem.count);
   }, [cartItem?.count]);
 
-  // Увеличить количество (+1)
-  const handleIncrease = () => setLocalCount((p) => p + 1);
+  // есть ли несохранённые изменения количества
+  const pendingUpdate = useMemo(() => {
+    if (!inCart) return false;
+    return (cartItem?.count ?? 0) !== localCount;
+  }, [inCart, cartItem?.count, localCount]);
 
-  // Уменьшить количество (минимум 1)
+  // +/-
+  const handleIncrease = () => setLocalCount((p) => p + 1);
   const handleDecrease = () => setLocalCount((p) => (p > 1 ? p - 1 : 1));
 
-  // Изменение вручную в инпуте
+  // ввод вручную
   const handleInputChange = (e) => {
     const v = parseInt(e.target.value, 10);
     if (!isNaN(v) && v >= 1) setLocalCount(v);
   };
 
-  // Главная кнопка — добавляет или удаляет товар
+  // основная кнопка: добавить / обновить / удалить
   const handleMainButton = () => {
-    if (inCart) {
-      // Если товар уже в корзине — удалить
-      dispatch(removeFromCart(id));
-      setLocalCount(1); // сбрасываем количество
-    } else {
-      // Если товара нет — добавить
+    if (!inCart) {
+      // не в корзине → добавить
       dispatch(addToCart({ id, name, image_src, unit, count: localCount }));
+      return;
     }
+
+    if (pendingUpdate) {
+      // в корзине и есть изменения → обновить количество
+      dispatch(setCount({ id, count: localCount }));
+      return;
+    }
+
+    // в корзине и изменений нет → удалить (по желанию)
+    dispatch(removeFromCart(id));
+    setLocalCount(1);
   };
+
+  // текст и класс кнопки по состоянию
+  const buttonText = !inCart
+    ? "В корзину"
+    : pendingUpdate
+    ? "В корзину"
+    : "В корзине ✔";
+  const buttonClass = !inCart ? "" : pendingUpdate ? "update" : "in-cart";
 
   return (
     <div className="card-item">
-      {/* Ссылка на страницу товара */}
       <Link to={`/catalog/${id}`} className="card-link">
         <div className="card-img">
           <img
@@ -58,7 +76,6 @@ function ProductCard({ id, image_src, name, unit = "шт" }) {
             alt={name}
             loading="lazy"
             decoding="async"
-            // Подставляем заглушку, если изображения нет
             onError={(e) => {
               e.currentTarget.src = "/placeholder.png";
             }}
@@ -67,7 +84,6 @@ function ProductCard({ id, image_src, name, unit = "шт" }) {
         <div className="card-info">{name}</div>
       </Link>
 
-      {/* Счётчик количества */}
       <div className="quantity">
         <button type="button" onClick={handleDecrease}>
           -
@@ -77,23 +93,20 @@ function ProductCard({ id, image_src, name, unit = "шт" }) {
           min="1"
           value={localCount}
           onChange={handleInputChange}
-          // При потере фокуса обновляем количество в корзине
-          onBlur={() => {
-            if (inCart) dispatch(setCount({ id, count: localCount }));
-          }}
+          // onBlur больше не обязателен: обновление делаем по кнопке "Обновить"
         />
         <button type="button" onClick={handleIncrease}>
           +
         </button>
       </div>
 
-      {/* Кнопка добавления или удаления */}
       <button
         type="button"
-        className={`add-to-cart ${inCart ? "in-cart" : ""}`}
+        className={`add-to-cart ${buttonClass}`}
         onClick={handleMainButton}
+        aria-pressed={inCart}
       >
-        {inCart ? "В корзине ✔" : "В корзину"}
+        {buttonText}
       </button>
     </div>
   );
