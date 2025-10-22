@@ -1,5 +1,5 @@
 import cartBrandSlice from "../model/slices/cartSliceBrand";
-import circuitBreakersSlice from "../model/slices/slicesFiltr/circuitBreakersSlice";
+import circuitBreakersSlice from "./slices/slicesFiltr/circuitBreakersSlice";
 import catalogAll from "../model/slices/catalogSlice";
 import AllProducts from "../model/slices/allProducts";
 import cartSlice from "../model/slices/cartSlice";
