@@ -1,79 +1,76 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  createSelector,
+} from "@reduxjs/toolkit";
 import axios from "axios";
+import { filterSchemas } from "@/shared/filters/filterSchemas";
+import { applyFilters } from "@/shared/filters/applyFilters";
 
 export const fetchCircuitBreakers = createAsyncThunk(
-  "CircuitBreakers/fetchBrand",
-  async ({ id }) => {
-    const { data } = await axios.get(
-      `https://way-electro-server.onrender.com/get_circuit_breakers_list/${id}`
-    );
+  "circuitBreakers/fetchList",
+  async ({ id } = {}) => {
+    const url = id
+      ? `https://way-electro-server.onrender.com/get_circuit_breakers_list/${id}`
+      : `https://way-electro-server.onrender.com/get_circuit_breakers_list`;
+    const { data } = await axios.get(url);
     return data;
   }
 );
 
 const initialState = {
-  itemCircuitBreakers: [],
   allItems: [],
-  statusCircuitBreakers: "loading",
-  filter: {
-    brand: "all",
-    poles: "all",
-    text: "",
-  },
+  status: "idle",
+  error: null,
+  filter: { brand: "all", poles: "all", text: "" },
 };
 
-const circuitBreakersSlice = createSlice({
-  name: "CircuitBreakers",
+const slice = createSlice({
+  name: "circuitBreakers",
   initialState,
   reducers: {
-    setItems(state, action) {
-      state.itemCircuitBreakers = action.payload;
+    setFilter(state, action) {
+      state.filter = { ...state.filter, ...action.payload };
     },
     clearFilter(state) {
       state.filter = { brand: "all", poles: "all", text: "" };
-      state.itemCircuitBreakers = state.allItems;
     },
-    setFilter(state, action) {
-      // Обновляем фильтр
-      state.filter = { ...state.filter, ...action.payload };
-
-      // Фильтруем товары
-      state.itemCircuitBreakers = state.allItems.filter((item) => {
-        const brandMatch =
-          state.filter.brand === "all" ||
-          String(item.brand_id) === String(state.filter.brand);
-
-        const polesMatch =
-          state.filter.poles === "all" ||
-          Number(item.number_of_poles) === Number(state.filter.poles);
-        const textMatch =
-          !state.filter.text ||
-          item.name.toLowerCase().includes(state.filter.text.toLowerCase());
-
-        return brandMatch && polesMatch && textMatch;
-      });
+    setItems(state, action) {
+      state.allItems = Array.isArray(action.payload) ? action.payload : [];
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchCircuitBreakers.pending, (state) => {
-      state.statusCircuitBreakers = "loading";
-      state.itemCircuitBreakers = [];
-      state.allItems = [];
+  extraReducers: (b) => {
+    b.addCase(fetchCircuitBreakers.pending, (s) => {
+      s.status = "loading";
+      s.error = null;
     });
-    builder.addCase(fetchCircuitBreakers.fulfilled, (state, action) => {
-      state.itemCircuitBreakers = action.payload;
-      state.allItems = action.payload;
-      state.statusCircuitBreakers = "resolved";
+    b.addCase(fetchCircuitBreakers.fulfilled, (s, a) => {
+      s.status = "resolved";
+      s.allItems = Array.isArray(a.payload) ? a.payload : [];
     });
-    builder.addCase(fetchCircuitBreakers.rejected, (state, action) => {
-      state.statusCircuitBreakers = "error";
-      state.error = action.payload;
-      state.itemCircuitBreakers = [];
-      state.allItems = [];
+    b.addCase(fetchCircuitBreakers.rejected, (s, a) => {
+      s.status = "error";
+      s.error = a.error?.message || "Fetch error";
+      s.allItems = [];
     });
   },
 });
 
-export const { setItems, setFilter, clearFilter } =
-  circuitBreakersSlice.actions;
-export default circuitBreakersSlice.reducer;
+export const { setFilter, clearFilter, setItems } = slice.actions;
+export default slice.reducer;
+
+// ---- селекторы (мемо) ----
+const selectSlice = (state) => state.catalogReducer.circuitBreakersSlice;
+
+export const selectCircuitBreakersAll = createSelector(
+  [selectSlice],
+  (s) => s.allItems
+);
+export const selectCircuitBreakersFilter = createSelector(
+  [selectSlice],
+  (s) => s.filter
+);
+export const selectCircuitBreakersVisible = createSelector(
+  [selectCircuitBreakersAll, selectCircuitBreakersFilter],
+  (items, filter) => applyFilters(items, filter, filterSchemas.circuitBreakers)
+);
