@@ -2,8 +2,12 @@ import FilterSidebar from "@features/catalog/ui/filterSidebar/filterSidebar";
 import SearchInpute from "@features/catalog/ui/searchInpute";
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchCatalogAll } from "../../model/slices/catalogSlice";
+import {
+  fetchCircuitBreakers,
+  selectCircuitBreakersVisible,
+} from "../../model/slices/slicesFiltr/circuitBreakersSlice";
 import ProductCard from "../catalogLayout/ProductCard";
 import Card from "../catalogLayout/cards/cards";
 import Pagination from "../catalogLayout/paginate/paginate";
@@ -13,51 +17,59 @@ function CatalogComps() {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams(); // если у тебя есть id в роуте для автоматов (например /catalog/avtomaty/:id)
 
-  // ссылка на блок с карточками
   const cardsRef = useRef(null);
 
-  // Состояние пагинации
+  // пагинация
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 15;
 
+  // общий каталог
   const { items } = useSelector((state) => state.catalogReducer.catalogAll);
-  const { itemCircuitBreakers } = useSelector(
-    (state) => state.catalogReducer.circuitBreakersSlice
-  );
+
+  // автоматы — БЕРЁМ ЧЕРЕЗ СЕЛЕКТОР
+  const circuitBreakers = useSelector(selectCircuitBreakersVisible);
 
   const isCatalog = location.pathname === "/catalog";
 
+  // грузим общий каталог для /catalog
   useEffect(() => {
-    dispatch(fetchCatalogAll());
-  }, [dispatch]);
+    if (isCatalog) dispatch(fetchCatalogAll());
+  }, [dispatch, isCatalog]);
 
-  // Мемоизация списка
+  // грузим автоматы для внутренних страниц каталога
+  useEffect(() => {
+    if (!isCatalog) {
+      // подставь нужный id. Если его нет в роуте — временно поставь 1
+      const effectiveId = id ?? 1;
+      dispatch(fetchCircuitBreakers({ id: effectiveId }));
+    }
+  }, [dispatch, isCatalog, id]);
+
+  // выбираем источник данных
   const dataToDisplay = useMemo(() => {
     const base = isCatalog
       ? [...items].sort((a, b) => a.name.localeCompare(b.name))
-      : itemCircuitBreakers;
+      : circuitBreakers;
     return base ?? [];
-  }, [isCatalog, items, itemCircuitBreakers]);
+  }, [isCatalog, items, circuitBreakers]);
 
   const pageCount = Math.max(1, Math.ceil(dataToDisplay.length / itemsPerPage));
   const offset = currentPage * itemsPerPage;
   const currentItems = dataToDisplay.slice(offset, offset + itemsPerPage);
 
-  // Сброс страницы при смене данных
+  // ресет страницы при смене данных
   useEffect(() => {
     setCurrentPage(0);
   }, [isCatalog, dataToDisplay.length]);
 
-  // При клике на номер страницы
+  // клик пагинации + скролл к карточкам
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
-
-    // прокрутка плавно к блоку карточек
     if (cardsRef.current) {
       const offsetTop =
         cardsRef.current.getBoundingClientRect().top + window.scrollY - 120;
-      // -120 = отступ от верха (можно поменять)
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
   };

@@ -13,7 +13,9 @@ export const fetchCircuitBreakers = createAsyncThunk(
     const url = id
       ? `https://way-electro-server.onrender.com/get_circuit_breakers_list/${id}`
       : `https://way-electro-server.onrender.com/get_circuit_breakers_list`;
+
     const { data } = await axios.get(url);
+
     return data;
   }
 );
