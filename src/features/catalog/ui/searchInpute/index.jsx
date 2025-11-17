@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -19,6 +25,8 @@ function SearchInpute() {
   const { allItems, filter } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
+  console.log(allItems);
+
   const { itemBrand } = useSelector(
     (state) => state.catalogReducer.cartBrandSlice
   );
@@ -31,13 +39,19 @@ function SearchInpute() {
     { value: "all", label: "Все бренды" },
     ...itemBrand.map((item) => ({ value: item.id, label: item.Name })),
   ];
-  const optionsPoles = [
-    { value: "all", label: "Все" },
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-  ];
+  const optionsPoles = useMemo(() => {
+    const set = new Set();
+    for (const it of allItems) {
+      if (it?.type2 != null && it.type2 !== "") {
+        set.add(String(it.type2));
+      }
+    }
+    const values = Array.from(set).sort((a, b) => Number(a) - Number(b));
+    return [
+      { value: "all", label: "Все" },
+      ...values.map((v) => ({ value: v, label: v })),
+    ];
+  }, [allItems]);
 
   // Очистка поиска
   const clearSearch = () => {
