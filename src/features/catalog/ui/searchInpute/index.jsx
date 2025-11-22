@@ -25,7 +25,6 @@ function SearchInpute() {
   const { allItems, filter } = useSelector(
     (state) => state.catalogReducer.circuitBreakersSlice
   );
-  console.log(allItems);
 
   const { itemBrand } = useSelector(
     (state) => state.catalogReducer.cartBrandSlice
@@ -79,6 +78,7 @@ function SearchInpute() {
         <Dropdown
           options={optionsBrand}
           placeholder="Бренды"
+          value={filter.brand === "all" ? null : filter.brand}
           onChange={(e) => dispatch(setFilter({ brand: e.value }))}
         />
       </div>
@@ -86,7 +86,8 @@ function SearchInpute() {
       <div className="search_filter">
         <Dropdown
           options={optionsPoles}
-          placeholder="Количество полюсов"
+          placeholder="Тип"
+          value={filter.poles === "all" ? null : filter.poles}
           onChange={(e) => dispatch(setFilter({ poles: e.value }))}
         />
       </div>
